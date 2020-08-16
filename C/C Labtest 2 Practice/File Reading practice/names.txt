@@ -1,0 +1,3 @@
+jorra 5	7
+inder 8	10
+daniel 50 52

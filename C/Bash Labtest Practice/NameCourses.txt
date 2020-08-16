@@ -1,0 +1,4 @@
+EECS2021	John Doe
+EECS2021	John P. Doe
+EECS2031	John Doe
+EECS4201	John Doe

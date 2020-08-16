@@ -1,0 +1,7 @@
+This is a text file. All of the contents
+of this text file should be copied into the 
+writer text file (write7).
+===========================================
+Word Count: 22
+Character Count: 90
+Lines: 3

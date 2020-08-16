@@ -1,0 +1,35 @@
+
+/*
+THE FOLLOWING IS WRITTEN IN A FORM OF PSEUDO CODE.
+THE PROFESSORS INSTRUCTIONS DETAILED THAT THIS COULD BE DONE.
+THE STEPS ARE WRITTEN OUT FOR BOTH PART1 OF THE QUESTION 
+AND FOR PART2 OF THE QUESTION.
+*/
+
+PART1 (WRIITEN IN PSEUDO):
+turn clock to port E (port 13)
+
+congifure pin on port E to no pullup and no pulldown, and also set the mux to 1
+
+Configure port E to be output.
+
+
+PART2 (WRIITEN IN PSEUDO):
+
+-first we must disable the global interrupts.
+
+-after we need to disable port C and port D interrupts  
+
+-configure the clock o port C and Port D by shifting the bits accordingly.
+
+-set the states for both port C and port D. Both as PDDR.
+
+-Next we need to congifure the pull up and pull down resistors along with the mux. This needs to be
+done for both port C and port D.
+
+-Next we need to configure the bits, IFQ, etc...
+
+-We then must re-enable the interrupts for both of the given ports, and then once more for the 
+the global interrupt.
+
+-use the interrupt to complete a task.

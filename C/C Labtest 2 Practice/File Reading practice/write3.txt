@@ -1,0 +1,9 @@
+this
+is
+a
+test
+for
+file
+reading
+part
+3.

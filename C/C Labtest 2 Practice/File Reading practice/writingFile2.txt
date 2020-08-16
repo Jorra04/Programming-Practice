@@ -1,0 +1,3 @@
+this is a file that has all
+capital letters. the result document
+will hopefully have all lowercase letters.
