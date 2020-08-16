@@ -49,9 +49,6 @@ void fib_seq(){
 
     std::cout << first_last+second_last<<"\n";
 
-
-
-
 }
 
 
@@ -89,8 +86,5 @@ int main(){
     else if(compare(answer, "Fibonacci") == true || compare(answer, "3") == true){
         fib_seq();
     }
-
-    
-
 
 }
