@@ -13,7 +13,7 @@ int length(char * str){
     return count -1;
 }
 
-void main(){
+int main(){
     char myArr[20];
     fgets(myArr,sizeof(myArr),stdin);
     printf("The array is: %s\n", myArr);
@@ -29,4 +29,5 @@ void main(){
 
         }
     }
+    return 0;
 }
