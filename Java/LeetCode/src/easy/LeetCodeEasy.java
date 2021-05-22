@@ -1,5 +1,6 @@
 package easy;
 
+import easy.Pair;
 import java.util.*;
 
 public class LeetCodeEasy {
@@ -20,14 +21,13 @@ public class LeetCodeEasy {
 //		int n = 3;
 //
 //		System.out.println(Arrays.toString(shuffle(nums, n)));
-	
+
 //		int[] nums = { 1};
 ////
 //		int target = 0;
 //		
 //		System.out.println(searchInsert(nums, target));
-		
-		
+
 //		int[] nums1 = {1};
 //		int m = 1; 
 //		int[] nums2 = {}; 
@@ -35,90 +35,102 @@ public class LeetCodeEasy {
 //		
 //		merge(nums1, m, nums2, n);
 //		System.out.println(Arrays.toString(nums1));
-		
-		
+
 //		String paragraph = "a, a, a, a, b,b,b,c, c";
 //		
 //		String[] banned = {"a"};
 //		
 //		
 //		System.out.println(mostCommonWord(paragraph, banned));
-		
-		
-		
-		
-		
+
 //		String sentence = "hellohello hellohellohello";
 //		String searchWord = "ell";
 //		
 //		System.out.println(isPrefixOfWord(sentence, searchWord));
+
+		int[] nums = {1,0,0,1,0,1};
+		int k = 2;
 		
-		
-		System.out.println("h");
-		
+		System.out.println(kLengthApart(nums, k));
+
 	}
-	
-	
-	 public static int isPrefixOfWord(String sentence, String searchWord) {
-	        String[] splitString = sentence.split("\\s+");
-	        
-	        for(int i = 0; i < splitString.length; i ++) {
-	            if(splitString[i].startsWith(searchWord)) {
-	                return i + 1;
-	            }
-	        }
-	        
-	        return -1;
-	    }
-	
-	
-	public static  String mostCommonWord(String paragraph, String[] banned) {
-        HashMap<String, Integer> wordCount = new HashMap();
-         
-        paragraph = paragraph.replaceAll("[^A-Za-z0-9 ]", " ").toLowerCase();
-        
-        String[] splitString = paragraph.split("\\s+");
-        HashSet<String> bannedSet = new HashSet();
-        
-        for(String bannedWord : banned){
-            bannedSet.add(bannedWord);
-        }
-        
-        for(String word : splitString) {
-        	word = word.trim();
-            if(wordCount.containsKey(word)) {
-                wordCount.put(word, wordCount.get(word) + 1);
-            } else {
-                wordCount.put(word, 1);
-            }
-        }
-        
-        
-        int maxOccurences = -1;
-        String mostFrequent = "";
-        for(Map.Entry<String, Integer> entry : wordCount.entrySet()) {
-            if(!bannedSet.contains(entry.getKey()) && entry.getValue() > maxOccurences) {
-                maxOccurences = entry.getValue();
-                mostFrequent = entry.getKey();
-            }
-        }
-        
-        return mostFrequent;
-    }
-	
-	
-	
+
+	public static boolean kLengthApart(int[] nums, int k) {
+
+		List<Pair> foundOnes = new ArrayList();
+
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 1) {
+				foundOnes.add(new Pair(nums[i], i));
+			}
+
+		}
+
+		for (int i = 1; i < foundOnes.size(); i++) {
+			System.out.println(foundOnes.get(i).position - foundOnes.get(i - 1).position);
+
+			if (foundOnes.get(i).position - foundOnes.get(i - 1).position -1 < k) {
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
+	public static int isPrefixOfWord(String sentence, String searchWord) {
+		String[] splitString = sentence.split("\\s+");
+
+		for (int i = 0; i < splitString.length; i++) {
+			if (splitString[i].startsWith(searchWord)) {
+				return i + 1;
+			}
+		}
+
+		return -1;
+	}
+
+	public static String mostCommonWord(String paragraph, String[] banned) {
+		HashMap<String, Integer> wordCount = new HashMap();
+
+		paragraph = paragraph.replaceAll("[^A-Za-z0-9 ]", " ").toLowerCase();
+
+		String[] splitString = paragraph.split("\\s+");
+		HashSet<String> bannedSet = new HashSet();
+
+		for (String bannedWord : banned) {
+			bannedSet.add(bannedWord);
+		}
+
+		for (String word : splitString) {
+			word = word.trim();
+			if (wordCount.containsKey(word)) {
+				wordCount.put(word, wordCount.get(word) + 1);
+			} else {
+				wordCount.put(word, 1);
+			}
+		}
+
+		int maxOccurences = -1;
+		String mostFrequent = "";
+		for (Map.Entry<String, Integer> entry : wordCount.entrySet()) {
+			if (!bannedSet.contains(entry.getKey()) && entry.getValue() > maxOccurences) {
+				maxOccurences = entry.getValue();
+				mostFrequent = entry.getKey();
+			}
+		}
+
+		return mostFrequent;
+	}
+
 	public static void merge(int[] nums1, int m, int[] nums2, int n) {
 		int index = 0;
-		for(int i = m; i < nums1.length; i ++) {
+		for (int i = m; i < nums1.length; i++) {
 			nums1[i] = nums2[index++];
 		}
-        
-		
+
 		Arrays.sort(nums1);
-    }
-	
-	
+	}
 
 	public static int searchInsert(int[] nums, int target) {
 
@@ -139,10 +151,9 @@ public class LeetCodeEasy {
 				return mid;
 			}
 
-			
 		}
 
-		return index +1;
+		return index + 1;
 	}
 
 	public static int[] shuffle(int[] nums, int n) {
