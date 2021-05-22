@@ -53,6 +53,9 @@ public class LeetCodeEasy {
 //		
 //		System.out.println(isPrefixOfWord(sentence, searchWord));
 		
+		
+		System.out.println("h");
+		
 	}
 	
 	
