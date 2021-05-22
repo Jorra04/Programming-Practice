@@ -48,12 +48,72 @@ public class LeetCodeEasy {
 //		
 //		System.out.println(isPrefixOfWord(sentence, searchWord));
 
-		int[] nums = {1,0,0,1,0,1};
-		int k = 2;
+//		int[] nums = {1,0,0,1,0,1};
+//		int k = 2;
+//		
+//		System.out.println(kLengthApart(nums, k));
 		
-		System.out.println(kLengthApart(nums, k));
+//		int a = 1;
+//		int b  = 0;
+//		System.out.println(b=~b);
+		
+		
+		
+		int[][] indices = {
+				{0,1},
+				{1,1}
+		};
+		
+		
+		
+		
+		System.out.println(oddCells(2, 3, indices));
+		
+		
 
 	}
+	
+	 public static int oddCells(int m, int n, int[][] indices) {
+	        int[][] matrix = new int[m][n];
+	        
+	        for(int[] instructions : indices) {
+	            changeRowValues(matrix, instructions[0]);
+	            changeColValues(matrix, instructions[1]);
+	        }
+	        
+	        
+	        return checkOdds(matrix);
+	    }
+	    
+	    
+	    
+	    public static int checkOdds(int[][] matrix) {
+	        int oddCounter = 0;
+	        for(int[] row : matrix) {
+	            for(int i : row) {
+	                if(i % 2 != 0 ){
+	                    oddCounter ++;
+	                }
+	            }
+	        }
+	        
+	        
+	        return oddCounter;
+	    }
+	    
+	    
+	    
+	    public static void changeRowValues(int[][] matrix, int row) {
+	        for(int i = 0; i <matrix[row].length; i ++) {
+	        	matrix[row][i] ++;
+	        }
+	    }
+	    
+	    public static void changeColValues(int[][] matrix, int col) {
+	        for(int i = 0; i <matrix.length; i ++) {
+	        	matrix[i][col] ++;
+	        }
+	    }
 
 	public static boolean kLengthApart(int[] nums, int k) {
 
