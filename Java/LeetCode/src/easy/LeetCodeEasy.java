@@ -58,20 +58,63 @@ public class LeetCodeEasy {
 //		System.out.println(b=~b);
 		
 		
+//		
+//		int[][] indices = {
+//				{0,1},
+//				{1,1}
+//		};
+//		
+//		
+//		
+//		
+//		System.out.println(oddCells(2, 3, indices));
+		String allowed = "ab";
 		
-		int[][] indices = {
-				{0,1},
-				{1,1}
-		};
+		String [] words = {"ad","bd","aaab","baa","badab"};
 		
-		
-		
-		
-		System.out.println(oddCells(2, 3, indices));
+		System.out.println(countConsistentStrings(allowed, words));
 		
 		
 
 	}
+	
+	
+	public static int countConsistentStrings(String allowed, String[] words) {
+        int consistentStrings = 0;
+        int[] charCountsAllowed = new int[26];
+        
+        for(char c : allowed.toCharArray()){
+            charCountsAllowed[c -'a'] ++;
+        }
+        
+         // System.out.println(Arrays.toString(charCountsAllowed) +"\n\n");
+        
+        for(String word : words) {
+            int[] tempCharCountsAllowed = new int[26];
+        
+            for(char c : word.toCharArray()){
+                tempCharCountsAllowed[c -'a'] ++;
+            }
+            
+            // System.out.println(Arrays.toString(tempCharCountsAllowed));
+            boolean mismatch = false;
+            for(int i = 0; i < 26 && !mismatch; i ++) {
+                mismatch = !(tempCharCountsAllowed[i] >= charCountsAllowed[i]);
+            
+            }
+            if(!mismatch) {
+                consistentStrings++;
+            }
+            
+            
+        }
+        
+        
+        return consistentStrings;
+        
+        
+    }
+	
 	
 	 public static int oddCells(int m, int n, int[][] indices) {
 	        int[][] matrix = new int[m][n];
