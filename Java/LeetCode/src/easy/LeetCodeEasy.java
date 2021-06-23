@@ -68,7 +68,7 @@ public class LeetCodeEasy {
 //		
 //		System.out.println(oddCells(2, 3, indices));
 //		String allowed = "ab";
-<<<<<<< HEAD
+
 //
 //		String[] words = { "ad", "bd", "aaab", "baa", "badab" };
 //
@@ -332,25 +332,6 @@ public class LeetCodeEasy {
 		return true;
 	}
 
-=======
-//		
-//		String [] words = {"ad","bd","aaab","baa","badab"};
-//		
-//		System.out.println(countConsistentStrings(allowed, words));
-		
-//		int [][] mat = {{1,2},{3,4}};
-//		int r = 2;
-//		int c = 4;
-//		
-//		System.out.println(Arrays.toString(matrixReshape(mat, r, c)));
-//		int[] arr = {1,0,2,3,0,4,5,0};
-//		duplicateZeros(arr);
-//		System.out.println(Arrays.toString(arr));
-		
-		char[] arr = {'a','b','c','d','e'};
-		rotateNTimes(arr, 2);
-		System.out.println(Arrays.toString(arr));
-	}
 	
 	public static void rotateNTimes(char[] arr,  int n) {
         for(int i = 0; i <arr.length; i ++) {
@@ -399,7 +380,7 @@ public class LeetCodeEasy {
     }
 	
 	
->>>>>>> 29255447d7ddeaad1526dd4eaa874fce0fc87af6
+
 	public static int countConsistentStrings(String allowed, String[] words) {
 		int consistentStrings = 0;
 		int[] charCountsAllowed = new int[26];
