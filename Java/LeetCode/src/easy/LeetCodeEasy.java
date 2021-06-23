@@ -68,6 +68,7 @@ public class LeetCodeEasy {
 //		
 //		System.out.println(oddCells(2, 3, indices));
 //		String allowed = "ab";
+<<<<<<< HEAD
 //
 //		String[] words = { "ad", "bd", "aaab", "baa", "badab" };
 //
@@ -331,6 +332,74 @@ public class LeetCodeEasy {
 		return true;
 	}
 
+=======
+//		
+//		String [] words = {"ad","bd","aaab","baa","badab"};
+//		
+//		System.out.println(countConsistentStrings(allowed, words));
+		
+//		int [][] mat = {{1,2},{3,4}};
+//		int r = 2;
+//		int c = 4;
+//		
+//		System.out.println(Arrays.toString(matrixReshape(mat, r, c)));
+//		int[] arr = {1,0,2,3,0,4,5,0};
+//		duplicateZeros(arr);
+//		System.out.println(Arrays.toString(arr));
+		
+		char[] arr = {'a','b','c','d','e'};
+		rotateNTimes(arr, 2);
+		System.out.println(Arrays.toString(arr));
+	}
+	
+	public static void rotateNTimes(char[] arr,  int n) {
+        for(int i = 0; i <arr.length; i ++) {
+        	char temp = arr[i%arr.length];
+            arr[i%arr.length] = arr[(i+1)%arr.length];
+            arr[(i+1)%arr.length] = temp;
+            
+        }
+    }
+	
+	public static void duplicateZeros(int[] arr) {
+        for(int i = 0; i < arr.length; i ++) {
+            if(arr[i] == 0) {
+                moveToRight(arr, i);
+                arr[i] = 0;
+                i++;
+            }
+        }
+    }
+    
+    public static void moveToRight(int[] arr, int until) {
+        for(int i = arr.length -1; i > until; i --) {
+            arr[i] = arr[i -1];
+        }
+    }
+	
+	
+	
+	public static int[][] matrixReshape(int[][] mat, int r, int c) {
+        int[][] newMatrix = new int[r][c];
+        int[] aux = new int[mat.length + mat[0].length];
+        int counter = 0;
+        for(int i = 0; i < mat.length; i ++) {
+            for(int j = 0; j < mat[i].length; j ++) {
+                aux[counter++] = mat[i][j];
+            }
+        }
+        counter = 0;
+        for(int i = 0; i < r; i ++){
+            for(int j = 0; j < c; j ++) {
+                newMatrix[i][j] = aux[counter++];
+            }
+        }
+        
+        return newMatrix;
+    }
+	
+	
+>>>>>>> 29255447d7ddeaad1526dd4eaa874fce0fc87af6
 	public static int countConsistentStrings(String allowed, String[] words) {
 		int consistentStrings = 0;
 		int[] charCountsAllowed = new int[26];
