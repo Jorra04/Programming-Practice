@@ -109,8 +109,12 @@ public class LeetCodeEasy {
 		setZeroes(matrix);
 		
 		System.out.println(Arrays.toString(matrix));
+		
+		
+		
 
 	}
+	
 
 	public static void setZeroes(int[][] matrix) {
 
@@ -288,6 +292,10 @@ public class LeetCodeEasy {
 //		
 //		return Math.max(max1, max2);
 //	}
+	
+	
+	
+	
 
 	public static boolean detectCapitalUse(String word) {
 
