@@ -105,16 +105,79 @@ public class LeetCodeEasy {
 
 //		System.out.println(winningDay(arr, low, high, ds));
 		
-		int[][] matrix = {{1,1,1},{1,0,1},{1,1,1}};
-		setZeroes(matrix);
+//		int[][] matrix = {{1,1,1},{1,0,1},{1,1,1}};
+//		setZeroes(matrix);
+//		
+//		System.out.println(Arrays.toString(matrix));
 		
-		System.out.println(Arrays.toString(matrix));
+		char[][] board = {{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','R','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'}};
 		
-		
-		
-
+		System.out.println(numRookCaptures(board));
 	}
 	
+	public static int numRookCaptures(char[][] board) {
+        int[] positions = findRook(board);
+        
+        int availableCaps = 0;
+        
+        availableCaps += upwards(positions[0], positions[1], board);
+        availableCaps += downwards(positions[0], positions[1], board);
+        availableCaps += left(positions[0], positions[1], board);
+        availableCaps += right(positions[0], positions[1], board);
+        
+        
+        return availableCaps;
+    }
+    
+    public static int upwards(int row, int col, char[][]board) {
+        for(int i = row; i >= 0; i --) {
+            if(board[i][col] == 'p') return 1;
+            
+            else if(board[i][col] == 'B') return 0;
+        }
+        return 0;    
+    }
+    
+    public static int downwards(int row, int col, char[][]board) {
+        for(int i = row; i < board[0].length; i ++) {
+            if(board[i][col] == 'p') return 1;
+            
+            else if(board[i][col] == 'B') return 0;
+        }
+        return 0;     
+    }
+    
+    public static int left(int row, int col, char[][]board) {
+        for(int i = col; i >= 0; i --) {
+            if(board[row][i] == 'p') return 1;
+            
+            else if(board[row][i] == 'B') return 0;
+        }
+        return 0;   
+    }
+    
+    public static int right(int row, int col, char[][]board) {
+    	for(int i = col; i < board[0].length; i ++) {
+            if(board[row][i] == 'p') return 1;
+            
+            else if(board[row][i] == 'B') return 0;
+        }
+        return 0; 
+    }
+    
+    
+    public static int[] findRook(char[][] board) {
+        int[] position = {-1, -1};
+        for(int i = 0; i < board.length; i ++) {
+            for(int j = 0; j < board[0].length; j++) {
+                if(board[i][j] == 'R') {
+                    return new int[] {i,j};
+                }
+            }
+        } 
+        
+        return position;
+    }
 
 	public static void setZeroes(int[][] matrix) {
 
