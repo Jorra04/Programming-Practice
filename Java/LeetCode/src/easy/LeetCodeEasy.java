@@ -114,15 +114,35 @@ public class LeetCodeEasy {
 //		
 //		System.out.println(numRookCaptures(board));
 		
-		int[] coins = {1,2,5};
-		int amount = 5;
-		
-		System.out.println(makeChange2(amount, coins));
-		System.out.println(makeChangeDP(amount, coins));
+//		int[] coins = {1,2,5};
+//		int amount = 5;
+//		
+//		System.out.println(makeChange2(amount, coins));
+//		System.out.println(makeChangeDP(amount, coins));
+		int[] temperatures = {55,38,53,81,61,93,97,32,43,78};
+		System.out.println(Arrays.toString(dailyTemperatures(temperatures)));
 
 		
 		
 	}
+	
+	public static int[] dailyTemperatures(int[] temperatures) {
+        int[] daysUntil = new int[temperatures.length];
+        int currIndex = 0;
+        for(int i = 0; i < temperatures.length; i ++) {
+            for(int j = i + 1; j < temperatures.length; j ++ ) {
+                if(temperatures[j] > temperatures[i]) {
+                    daysUntil[currIndex] = j-i;
+                    break;
+                }
+                
+                
+            }
+            currIndex++;
+        }
+        
+        return daysUntil;
+    }
 	
 	public static void matrixPrinter(int[][] mat) {
 		for(int[] row : mat) {
