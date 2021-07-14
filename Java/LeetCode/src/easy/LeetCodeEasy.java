@@ -110,9 +110,58 @@ public class LeetCodeEasy {
 //		
 //		System.out.println(Arrays.toString(matrix));
 		
-		char[][] board = {{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','R','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'}};
+//		char[][] board = {{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','R','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'}};
+//		
+//		System.out.println(numRookCaptures(board));
 		
-		System.out.println(numRookCaptures(board));
+		int[] coins = {1,2,5};
+		int amount = 5;
+		
+		System.out.println(makeChange2(amount, coins));
+		System.out.println(makeChangeDP(amount, coins));
+
+		
+		
+	}
+	
+	public static void matrixPrinter(int[][] mat) {
+		for(int[] row : mat) {
+			System.out.println(Arrays.toString(row));
+		}
+	}
+	
+	public static int makeChangeDP(int amount, int[] coins) {
+		int[][] dp = new int[coins.length + 1][amount +1];
+		//Fill the first row with ones
+		for(int i = 0; i < dp.length; i ++ ) {
+			dp[i][0] = 1;
+		}
+		int coinsIndex = 0;
+		for(int i = 1; i < dp.length; i ++) {
+			for(int j = 1; j < dp[0].length; j ++ ) {
+				if(coins[coinsIndex] > j) {
+					dp[i][j] = dp[i-1][j];
+				} else {
+					dp[i][j] = dp[i-1][j] + dp[i][j - coins[i-1]];
+				}
+			}
+			coinsIndex++;
+		}
+		matrixPrinter(dp);
+		
+		return dp[coins.length][amount];
+	}
+	
+	public static int makeChange2(int amount, int[] coins) {
+		int[] dp = new int[amount + 1];
+		dp[0]= 1;
+		for(int coin : coins) {
+			for(int i = coin; i <  amount + 1; i ++) {
+				dp[i] += dp[i-coin];
+			}
+			
+		}
+		return dp[amount];
 	}
 	
 	public static int numRookCaptures(char[][] board) {
