@@ -1,6 +1,8 @@
 package easy;
 
 import easy.Pair;
+
+
 import java.util.*;
 
 public class LeetCodeEasy {
@@ -119,11 +121,94 @@ public class LeetCodeEasy {
 //		
 //		System.out.println(makeChange2(amount, coins));
 //		System.out.println(makeChangeDP(amount, coins));
-		int[] temperatures = {55,38,53,81,61,93,97,32,43,78};
-		System.out.println(Arrays.toString(dailyTemperatures(temperatures)));
+//		int[] temperatures = {55,38,53,81,61,93,97,32,43,78};
+//		System.out.println(Arrays.toString(dailyTemperatures(temperatures)));
 
+		List<Job> jobs = new ArrayList();
+//		Test 1
+//		jobs.add(new Job(1,3,5));
+//		jobs.add(new Job(5,8,11));
+//		
+//		jobs.add(new Job(4,6,5));
+//		jobs.add(new Job(7,9,2));
+//		jobs.add(new Job(6,7,4));
+//		jobs.add(new Job(2,5,6));
+		
+//		Test 2		
+//		jobs.add(new Job(1,4,3));
+//		jobs.add(new Job(2,6,5));
+//		
+//		jobs.add(new Job(4,7,2));
+//		jobs.add(new Job(6,8,6));
+//		jobs.add(new Job(5,9,4));
+//		jobs.add(new Job(7,10,8));
+		
+//		Test 3		
+		jobs.add(new Job(1,2,50));
+		jobs.add(new Job(3,5,20));
+		
+		jobs.add(new Job(6,19,100));
+		jobs.add(new Job(2,100,200));	
 		
 		
+		System.out.println(jobScheduling(jobs));
+	}
+	
+	
+	
+	public static List<Job> jobScheduling(List<Job> jobs) {
+		if(jobs.size() == 0) {
+			return jobs;
+		}
+		int[] dp = new int[jobs.size()];
+		Collections.sort(jobs);
+		
+		//Fill array with initial profits
+		for(int i = 0 ; i < jobs.size(); i ++ ) {
+			dp[i] = jobs.get(i).profit;
+		}
+		
+		for(int i = 1; i < jobs.size(); i ++) {
+			for(int j = 0; j < i; j ++) {
+				if(jobs.get(i).start >= jobs.get(j).end) {
+					dp[i] = Math.max(dp[i], jobs.get(i).profit + jobs.get(j).profit);
+				}
+			}
+		}
+		
+		//Find the maximum in the DP array
+		int max = Integer.MIN_VALUE;
+		int indexOfMax = -1;
+		for(int i = 0 ; i < dp.length; i ++ ) {
+			if(dp[i] > max) {
+				max = dp[i];
+				indexOfMax = i;
+			}
+		}
+		List<Job> solutionSet = new ArrayList();
+		for(int i = 0; i < indexOfMax; i ++) {
+			if(jobs.get(i).end <= jobs.get(indexOfMax).start) {
+				if(containsOverlap(jobs.get(i), solutionSet) == jobs.get(i)) {
+					solutionSet.add(jobs.get(i));
+				}
+			}
+		}
+
+		solutionSet.add(jobs.get(indexOfMax));
+		return solutionSet;
+	}
+	
+	public static Job containsOverlap(Job job, List<Job> jobs) {
+		for(int i = 0; i < jobs.size(); i ++) {
+			if(jobs.get(i).start < job.end) {
+				if(job.profit < jobs.get(i).profit) {
+					return jobs.get(i);
+				} else {
+					jobs.remove(i);
+				}
+			}
+		}
+		 return job;
 	}
 	
 	public static int[] dailyTemperatures(int[] temperatures) {
