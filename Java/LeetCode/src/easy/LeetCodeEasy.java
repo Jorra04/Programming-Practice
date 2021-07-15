@@ -125,7 +125,7 @@ public class LeetCodeEasy {
 //		System.out.println(Arrays.toString(dailyTemperatures(temperatures)));
 
 		List<Job> jobs = new ArrayList();
-//		Test 1
+//		Test 1 tushar case
 //		jobs.add(new Job(1,3,5));
 //		jobs.add(new Job(5,8,11));
 //		
@@ -134,7 +134,7 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(6,7,4));
 //		jobs.add(new Job(2,5,6));
 		
-//		Test 2		
+//		Test 2	other video case
 //		jobs.add(new Job(1,4,3));
 //		jobs.add(new Job(2,6,5));
 //		
@@ -143,12 +143,36 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(5,9,4));
 //		jobs.add(new Job(7,10,8));
 		
-//		Test 3		
-		jobs.add(new Job(1,2,50));
-		jobs.add(new Job(3,5,20));
+//		Test 3	gfg case
+//		jobs.add(new Job(1,2,50));
+//		jobs.add(new Job(3,5,20));
+//		
+//		jobs.add(new Job(6,19,100));
+//		jobs.add(new Job(2,100,200));
 		
-		jobs.add(new Job(6,19,100));
-		jobs.add(new Job(2,100,200));	
+//		Test 4 custom case
+		jobs.add(new Job(1,5,50));
+		jobs.add(new Job(6,16,25));
+		
+		jobs.add(new Job(2,10,2));
+		jobs.add(new Job(11,18, 10));
+		jobs.add(new Job(17,20, 25));
+		
+//		Test 5 case where none overlap
+//		jobs.add(new Job(0,5,60));
+//		jobs.add(new Job(5, 10, 70));
+//		
+//		jobs.add(new Job(10,12,80));
+//		jobs.add(new Job(12,13, 1));
+//		jobs.add(new Job(13,18, 3));
+		
+//		Test 6 case where all overlap
+//		jobs.add(new Job(0,6,5));
+//		jobs.add(new Job(1, 7, 6));
+//		
+//		jobs.add(new Job(2,9,8));
+//		jobs.add(new Job(3,12, 3));
+//		jobs.add(new Job(4,15, 1));
 		
 		
 		System.out.println(jobScheduling(jobs));
@@ -171,7 +195,7 @@ public class LeetCodeEasy {
 		for(int i = 1; i < jobs.size(); i ++) {
 			for(int j = 0; j < i; j ++) {
 				if(jobs.get(i).start >= jobs.get(j).end) {
-					dp[i] = Math.max(dp[i], jobs.get(i).profit + jobs.get(j).profit);
+					dp[i] = Math.max(dp[i], jobs.get(i).profit + dp[j]);
 				}
 			}
 		}
@@ -200,7 +224,7 @@ public class LeetCodeEasy {
 	
 	public static Job containsOverlap(Job job, List<Job> jobs) {
 		for(int i = 0; i < jobs.size(); i ++) {
-			if(jobs.get(i).start < job.end) {
+			if(job.start < jobs.get(i).end) {
 				if(job.profit < jobs.get(i).profit) {
 					return jobs.get(i);
 				} else {
