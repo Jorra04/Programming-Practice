@@ -124,7 +124,7 @@ public class LeetCodeEasy {
 //		int[] temperatures = {55,38,53,81,61,93,97,32,43,78};
 //		System.out.println(Arrays.toString(dailyTemperatures(temperatures)));
 
-		List<Job> jobs = new ArrayList();
+//		List<Job> jobs = new ArrayList();
 //		Test 1 tushar case
 //		jobs.add(new Job(1,3,5));
 //		jobs.add(new Job(5,8,11));
@@ -151,12 +151,12 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(2,100,200));
 		
 //		Test 4 custom case
-		jobs.add(new Job(1,5,50));
-		jobs.add(new Job(6,16,25));
-		
-		jobs.add(new Job(2,10,2));
-		jobs.add(new Job(11,18, 10));
-		jobs.add(new Job(17,20, 25));
+//		jobs.add(new Job(1,5,50));
+//		jobs.add(new Job(6,16,25));
+//		
+//		jobs.add(new Job(2,10,2));
+//		jobs.add(new Job(11,18, 10));
+//		jobs.add(new Job(17,20, 25));
 		
 //		Test 5 case where none overlap
 //		jobs.add(new Job(0,5,60));
@@ -175,65 +175,65 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(4,15, 1));
 		
 		
-		System.out.println(jobScheduling(jobs));
+//		System.out.println(jobScheduling(jobs));
 	}
 	
 	
 	
-	public static List<Job> jobScheduling(List<Job> jobs) {
-		if(jobs.size() == 0) {
-			return jobs;
-		}
-		int[] dp = new int[jobs.size()];
-		Collections.sort(jobs);
-		
-		//Fill array with initial profits
-		for(int i = 0 ; i < jobs.size(); i ++ ) {
-			dp[i] = jobs.get(i).profit;
-		}
-		
-		for(int i = 1; i < jobs.size(); i ++) {
-			for(int j = 0; j < i; j ++) {
-				if(jobs.get(i).start >= jobs.get(j).end) {
-					dp[i] = Math.max(dp[i], jobs.get(i).profit + dp[j]);
-				}
-			}
-		}
-		
-		//Find the maximum in the DP array
-		int max = Integer.MIN_VALUE;
-		int indexOfMax = -1;
-		for(int i = 0 ; i < dp.length; i ++ ) {
-			if(dp[i] > max) {
-				max = dp[i];
-				indexOfMax = i;
-			}
-		}
-		List<Job> solutionSet = new ArrayList();
-		for(int i = 0; i < indexOfMax; i ++) {
-			if(jobs.get(i).end <= jobs.get(indexOfMax).start) {
-				if(containsOverlap(jobs.get(i), solutionSet) == jobs.get(i)) {
-					solutionSet.add(jobs.get(i));
-				}
-			}
-		}
-
-		solutionSet.add(jobs.get(indexOfMax));
-		return solutionSet;
-	}
-	
-	public static Job containsOverlap(Job job, List<Job> jobs) {
-		for(int i = 0; i < jobs.size(); i ++) {
-			if(job.start < jobs.get(i).end) {
-				if(job.profit < jobs.get(i).profit) {
-					return jobs.get(i);
-				} else {
-					jobs.remove(i);
-				}
-			}
-		}
-		 return job;
-	}
+//	public static List<Job> jobScheduling(List<Job> jobs) {
+//		if(jobs.size() == 0) {
+//			return jobs;
+//		}
+//		int[] dp = new int[jobs.size()];
+//		Collections.sort(jobs);
+//		
+//		//Fill array with initial profits
+//		for(int i = 0 ; i < jobs.size(); i ++ ) {
+//			dp[i] = jobs.get(i).profit;
+//		}
+//		
+//		for(int i = 1; i < jobs.size(); i ++) {
+//			for(int j = 0; j < i; j ++) {
+//				if(jobs.get(i).start >= jobs.get(j).end) {
+//					dp[i] = Math.max(dp[i], jobs.get(i).profit + dp[j]);
+//				}
+//			}
+//		}
+//		
+//		//Find the maximum in the DP array
+//		int max = Integer.MIN_VALUE;
+//		int indexOfMax = -1;
+//		for(int i = 0 ; i < dp.length; i ++ ) {
+//			if(dp[i] > max) {
+//				max = dp[i];
+//				indexOfMax = i;
+//			}
+//		}
+//		List<Job> solutionSet = new ArrayList();
+//		for(int i = 0; i < indexOfMax; i ++) {
+//			if(jobs.get(i).end <= jobs.get(indexOfMax).start) {
+//				if(containsOverlap(jobs.get(i), solutionSet) == jobs.get(i)) {
+//					solutionSet.add(jobs.get(i));
+//				}
+//			}
+//		}
+//
+//		solutionSet.add(jobs.get(indexOfMax));
+//		return solutionSet;
+//	}
+//	
+//	public static Job containsOverlap(Job job, List<Job> jobs) {
+//		for(int i = 0; i < jobs.size(); i ++) {
+//			if(job.start < jobs.get(i).end) {
+//				if(job.profit < jobs.get(i).profit) {
+//					return jobs.get(i);
+//				} else {
+//					jobs.remove(i);
+//				}
+//			}
+//		}
+//		 return job;
+//	}
 	
 	public static int[] dailyTemperatures(int[] temperatures) {
         int[] daysUntil = new int[temperatures.length];
