@@ -41,12 +41,12 @@ class Graph
     {
         // Mark the current node as visited and print it
         visited[v] = true;
-        
+        size ++;
         // Recur for all the vertices
         // adjacent to this vertex
         for (int x : adjListArray.get(v)) {
             if (!visited[x]) {
-            	size ++;
+            	
                 size = Math.max(size, DFSUtil(x, visited, size));
             }
         }
@@ -64,7 +64,7 @@ class Graph
                 connectedLengths.add(DFSUtil(v, visited, 0));
             }
         }
-        
+        System.out.println(connectedLengths);
         for(int i = 1; i < connectedLengths.size(); i ++) {
         	if(connectedLengths.get(i) != connectedLengths.get(i -1)) {
         		return false;
@@ -79,12 +79,16 @@ class Graph
     {
         // Create a graph given in the above diagram
         Graph g = new Graph(
-            6); // 5 vertices numbered from 0 to 4
+            5); // 5 vertices numbered from 0 to 4
  
         g.addEdge(1, 0);
         g.addEdge(1, 2);
+//        g.addEdge(0, 4);
+//        g.addEdge(0, 3);
+//        g.addEdge(2, 5);
+//        g.addEdge(2, 6);
         g.addEdge(3, 4);
-        g.addEdge(4, 5);
+//        g.addEdge(4, 5);
         System.out.println(
             "All disconected components have the same length: " + g.connectedComponents());
         
