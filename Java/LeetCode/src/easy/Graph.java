@@ -9,7 +9,7 @@ class Graph
     // in graph)
     int V;
     ArrayList<ArrayList<Integer> > adjListArray;
-    int size = 0;
+//    int size = 0;
     // constructor
     Graph(int V)
     {
@@ -37,32 +37,41 @@ class Graph
         adjListArray.get(dest).add(src);
     }
  
-    void DFSUtil(int v, boolean[] visited)
+    int DFSUtil(int v, boolean[] visited, int size)
     {
         // Mark the current node as visited and print it
         visited[v] = true;
-
-        size ++;
+        
         // Recur for all the vertices
         // adjacent to this vertex
         for (int x : adjListArray.get(v)) {
-            if (!visited[x])
-                DFSUtil(x, visited);
+            if (!visited[x]) {
+            	size ++;
+                size = Math.max(size, DFSUtil(x, visited, size));
+            }
         }
+        
+        return size;
     }
-    void connectedComponents()
+    boolean connectedComponents()
     {
         // Mark all the vertices as not visited
-    	
+    	ArrayList<Integer> connectedLengths = new ArrayList();
         boolean[] visited = new boolean[V];
         for (int v = 0; v < V; ++v) {
             if (!visited[v]) {
    
-                DFSUtil(v, visited);
-                System.out.println(size);
-                size = 0;
+                connectedLengths.add(DFSUtil(v, visited, 0));
             }
         }
+        
+        for(int i = 1; i < connectedLengths.size(); i ++) {
+        	if(connectedLengths.get(i) != connectedLengths.get(i -1)) {
+        		return false;
+        	}
+        }
+        
+        return true;
     }
  
     // Driver code
@@ -70,13 +79,14 @@ class Graph
     {
         // Create a graph given in the above diagram
         Graph g = new Graph(
-            5); // 5 vertices numbered from 0 to 4
+            6); // 5 vertices numbered from 0 to 4
  
         g.addEdge(1, 0);
         g.addEdge(1, 2);
         g.addEdge(3, 4);
+        g.addEdge(4, 5);
         System.out.println(
-            "Following are connected components");
-        g.connectedComponents();
+            "All disconected components have the same length: " + g.connectedComponents());
+        
     }
 }
