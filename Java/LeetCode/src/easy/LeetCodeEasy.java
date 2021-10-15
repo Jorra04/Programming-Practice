@@ -2,7 +2,6 @@ package easy;
 
 import easy.Pair;
 
-
 import java.util.*;
 
 public class LeetCodeEasy {
@@ -106,16 +105,16 @@ public class LeetCodeEasy {
 //		HashMap<Integer, Integer> ds = new HashMap();
 
 //		System.out.println(winningDay(arr, low, high, ds));
-		
+
 //		int[][] matrix = {{1,1,1},{1,0,1},{1,1,1}};
 //		setZeroes(matrix);
 //		
 //		System.out.println(Arrays.toString(matrix));
-		
+
 //		char[][] board = {{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','R','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.'}};
 //		
 //		System.out.println(numRookCaptures(board));
-		
+
 //		int[] coins = {1,2,5};
 //		int amount = 5;
 //		
@@ -133,7 +132,7 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(7,9,2));
 //		jobs.add(new Job(6,7,4));
 //		jobs.add(new Job(2,5,6));
-		
+
 //		Test 2	other video case
 //		jobs.add(new Job(1,4,3));
 //		jobs.add(new Job(2,6,5));
@@ -142,14 +141,14 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(6,8,6));
 //		jobs.add(new Job(5,9,4));
 //		jobs.add(new Job(7,10,8));
-		
+
 //		Test 3	gfg case
 //		jobs.add(new Job(1,2,50));
 //		jobs.add(new Job(3,5,20));
 //		
 //		jobs.add(new Job(6,19,100));
 //		jobs.add(new Job(2,100,200));
-		
+
 //		Test 4 custom case
 //		jobs.add(new Job(1,5,50));
 //		jobs.add(new Job(6,16,25));
@@ -157,7 +156,7 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(2,10,2));
 //		jobs.add(new Job(11,18, 10));
 //		jobs.add(new Job(17,20, 25));
-		
+
 //		Test 5 case where none overlap
 //		jobs.add(new Job(0,5,60));
 //		jobs.add(new Job(5, 10, 70));
@@ -165,7 +164,7 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(10,12,80));
 //		jobs.add(new Job(12,13, 1));
 //		jobs.add(new Job(13,18, 3));
-		
+
 //		Test 6 case where all overlap
 //		jobs.add(new Job(0,6,5));
 //		jobs.add(new Job(1, 7, 6));
@@ -173,13 +172,22 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(2,9,8));
 //		jobs.add(new Job(3,12, 3));
 //		jobs.add(new Job(4,15, 1));
-		
-		
+
 //		System.out.println(jobScheduling(jobs));
+		
+		
+		char[][] grids ={
+				{'1','1','1','1','0'},
+				{'1','1','0','1','0'},
+				{'1','1','0','0','0'},
+				{'0','0','0','0','0'}
+		};
+		
+		System.out.println(numIslands(grids));
+		
+		
 	}
-	
-	
-	
+
 //	public static List<Job> jobScheduling(List<Job> jobs) {
 //		if(jobs.size() == 0) {
 //			return jobs;
@@ -235,127 +243,135 @@ public class LeetCodeEasy {
 //		 return job;
 //	}
 	
-	public static int[] dailyTemperatures(int[] temperatures) {
-        int[] daysUntil = new int[temperatures.length];
-        int currIndex = 0;
-        for(int i = 0; i < temperatures.length; i ++) {
-            for(int j = i + 1; j < temperatures.length; j ++ ) {
-                if(temperatures[j] > temperatures[i]) {
-                    daysUntil[currIndex] = j-i;
-                    break;
-                }
-                
-                
-            }
-            currIndex++;
-        }
-        
-        return daysUntil;
-    }
+
 	
+
+	public static int[] dailyTemperatures(int[] temperatures) {
+		int[] daysUntil = new int[temperatures.length];
+		int currIndex = 0;
+		for (int i = 0; i < temperatures.length; i++) {
+			for (int j = i + 1; j < temperatures.length; j++) {
+				if (temperatures[j] > temperatures[i]) {
+					daysUntil[currIndex] = j - i;
+					break;
+				}
+
+			}
+			currIndex++;
+		}
+
+		return daysUntil;
+	}
+
 	public static void matrixPrinter(int[][] mat) {
-		for(int[] row : mat) {
+		for (int[] row : mat) {
 			System.out.println(Arrays.toString(row));
 		}
 	}
-	
+
 	public static int makeChangeDP(int amount, int[] coins) {
-		int[][] dp = new int[coins.length + 1][amount +1];
-		//Fill the first row with ones
-		for(int i = 0; i < dp.length; i ++ ) {
+		int[][] dp = new int[coins.length + 1][amount + 1];
+		// Fill the first row with ones
+		for (int i = 0; i < dp.length; i++) {
 			dp[i][0] = 1;
 		}
 		int coinsIndex = 0;
-		for(int i = 1; i < dp.length; i ++) {
-			for(int j = 1; j < dp[0].length; j ++ ) {
-				if(coins[coinsIndex] > j) {
-					dp[i][j] = dp[i-1][j];
+		for (int i = 1; i < dp.length; i++) {
+			for (int j = 1; j < dp[0].length; j++) {
+				if (coins[coinsIndex] > j) {
+					dp[i][j] = dp[i - 1][j];
 				} else {
-					dp[i][j] = dp[i-1][j] + dp[i][j - coins[i-1]];
+					dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]];
 				}
 			}
 			coinsIndex++;
 		}
 		matrixPrinter(dp);
-		
+
 		return dp[coins.length][amount];
 	}
-	
+
 	public static int makeChange2(int amount, int[] coins) {
 		int[] dp = new int[amount + 1];
-		dp[0]= 1;
-		for(int coin : coins) {
-			for(int i = coin; i <  amount + 1; i ++) {
-				dp[i] += dp[i-coin];
+		dp[0] = 1;
+		for (int coin : coins) {
+			for (int i = coin; i < amount + 1; i++) {
+				dp[i] += dp[i - coin];
 			}
-			
+
 		}
 		return dp[amount];
 	}
-	
+
 	public static int numRookCaptures(char[][] board) {
-        int[] positions = findRook(board);
-        
-        int availableCaps = 0;
-        
-        availableCaps += upwards(positions[0], positions[1], board);
-        availableCaps += downwards(positions[0], positions[1], board);
-        availableCaps += left(positions[0], positions[1], board);
-        availableCaps += right(positions[0], positions[1], board);
-        
-        
-        return availableCaps;
-    }
-    
-    public static int upwards(int row, int col, char[][]board) {
-        for(int i = row; i >= 0; i --) {
-            if(board[i][col] == 'p') return 1;
-            
-            else if(board[i][col] == 'B') return 0;
-        }
-        return 0;    
-    }
-    
-    public static int downwards(int row, int col, char[][]board) {
-        for(int i = row; i < board[0].length; i ++) {
-            if(board[i][col] == 'p') return 1;
-            
-            else if(board[i][col] == 'B') return 0;
-        }
-        return 0;     
-    }
-    
-    public static int left(int row, int col, char[][]board) {
-        for(int i = col; i >= 0; i --) {
-            if(board[row][i] == 'p') return 1;
-            
-            else if(board[row][i] == 'B') return 0;
-        }
-        return 0;   
-    }
-    
-    public static int right(int row, int col, char[][]board) {
-    	for(int i = col; i < board[0].length; i ++) {
-            if(board[row][i] == 'p') return 1;
-            
-            else if(board[row][i] == 'B') return 0;
-        }
-        return 0; 
-    }
-    
-    
-    public static int[] findRook(char[][] board) {
-        int[] position = {-1, -1};
-        for(int i = 0; i < board.length; i ++) {
-            for(int j = 0; j < board[0].length; j++) {
-                if(board[i][j] == 'R') {
-                    return new int[] {i,j};
-                }
-            }
-        } 
-        
-        return position;
-    }
+		int[] positions = findRook(board);
+
+		int availableCaps = 0;
+
+		availableCaps += upwards(positions[0], positions[1], board);
+		availableCaps += downwards(positions[0], positions[1], board);
+		availableCaps += left(positions[0], positions[1], board);
+		availableCaps += right(positions[0], positions[1], board);
+
+		return availableCaps;
+	}
+
+	public static int upwards(int row, int col, char[][] board) {
+		for (int i = row; i >= 0; i--) {
+			if (board[i][col] == 'p')
+				return 1;
+
+			else if (board[i][col] == 'B')
+				return 0;
+		}
+		return 0;
+	}
+
+	public static int downwards(int row, int col, char[][] board) {
+		for (int i = row; i < board[0].length; i++) {
+			if (board[i][col] == 'p')
+				return 1;
+
+			else if (board[i][col] == 'B')
+				return 0;
+		}
+		return 0;
+	}
+
+	public static int left(int row, int col, char[][] board) {
+		for (int i = col; i >= 0; i--) {
+			if (board[row][i] == 'p')
+				return 1;
+
+			else if (board[row][i] == 'B')
+				return 0;
+		}
+		return 0;
+	}
+
+	public static int right(int row, int col, char[][] board) {
+		for (int i = col; i < board[0].length; i++) {
+			if (board[row][i] == 'p')
+				return 1;
+
+			else if (board[row][i] == 'B')
+				return 0;
+		}
+		return 0;
+	}
+
+	public static int[] findRook(char[][] board) {
+		int[] position = { -1, -1 };
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+				if (board[i][j] == 'R') {
+					return new int[] { i, j };
+				}
+			}
+		}
+
+		return position;
+	}
 
 	public static void setZeroes(int[][] matrix) {
 
@@ -533,10 +549,6 @@ public class LeetCodeEasy {
 //		
 //		return Math.max(max1, max2);
 //	}
-	
-	
-	
-	
 
 	public static boolean detectCapitalUse(String word) {
 
@@ -581,54 +593,49 @@ public class LeetCodeEasy {
 		return true;
 	}
 
-	
-	public static void rotateNTimes(char[] arr,  int n) {
-        for(int i = 0; i <arr.length; i ++) {
-        	char temp = arr[i%arr.length];
-            arr[i%arr.length] = arr[(i+1)%arr.length];
-            arr[(i+1)%arr.length] = temp;
-            
-        }
-    }
-	
+	public static void rotateNTimes(char[] arr, int n) {
+		for (int i = 0; i < arr.length; i++) {
+			char temp = arr[i % arr.length];
+			arr[i % arr.length] = arr[(i + 1) % arr.length];
+			arr[(i + 1) % arr.length] = temp;
+
+		}
+	}
+
 	public static void duplicateZeros(int[] arr) {
-        for(int i = 0; i < arr.length; i ++) {
-            if(arr[i] == 0) {
-                moveToRight(arr, i);
-                arr[i] = 0;
-                i++;
-            }
-        }
-    }
-    
-    public static void moveToRight(int[] arr, int until) {
-        for(int i = arr.length -1; i > until; i --) {
-            arr[i] = arr[i -1];
-        }
-    }
-	
-	
-	
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] == 0) {
+				moveToRight(arr, i);
+				arr[i] = 0;
+				i++;
+			}
+		}
+	}
+
+	public static void moveToRight(int[] arr, int until) {
+		for (int i = arr.length - 1; i > until; i--) {
+			arr[i] = arr[i - 1];
+		}
+	}
+
 	public static int[][] matrixReshape(int[][] mat, int r, int c) {
-        int[][] newMatrix = new int[r][c];
-        int[] aux = new int[mat.length + mat[0].length];
-        int counter = 0;
-        for(int i = 0; i < mat.length; i ++) {
-            for(int j = 0; j < mat[i].length; j ++) {
-                aux[counter++] = mat[i][j];
-            }
-        }
-        counter = 0;
-        for(int i = 0; i < r; i ++){
-            for(int j = 0; j < c; j ++) {
-                newMatrix[i][j] = aux[counter++];
-            }
-        }
-        
-        return newMatrix;
-    }
-	
-	
+		int[][] newMatrix = new int[r][c];
+		int[] aux = new int[mat.length + mat[0].length];
+		int counter = 0;
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat[i].length; j++) {
+				aux[counter++] = mat[i][j];
+			}
+		}
+		counter = 0;
+		for (int i = 0; i < r; i++) {
+			for (int j = 0; j < c; j++) {
+				newMatrix[i][j] = aux[counter++];
+			}
+		}
+
+		return newMatrix;
+	}
 
 	public static int countConsistentStrings(String allowed, String[] words) {
 		int consistentStrings = 0;
@@ -908,6 +915,36 @@ public class LeetCodeEasy {
 		System.out.println(set);
 
 		return set;
+	}
+
+	public static int numIslands(char[][] grid) {
+
+		int numberIslands = 0;
+
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				if(grid[i][j] == '1') {
+					numberIslands++;
+					bfs(i, j, grid);
+				}
+			}
+		}
+
+		return numberIslands;
+
+	}
+
+	public static void bfs(int row, int col, char[][] grid) {
+		if (row >= grid.length || col >= grid[0].length || col < 0 || row < 0 || grid[row][col] == '0') {
+			return;
+		}
+
+		grid[row][col] = '0';
+
+		bfs(row + 1, col, grid); // Check upwards
+		bfs(row - 1, col, grid); // Check downwards
+		bfs(row, col - 1, grid); // Check left
+		bfs(row, col + 1, grid); // Check right
 	}
 
 }
