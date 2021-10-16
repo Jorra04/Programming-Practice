@@ -174,18 +174,34 @@ public class LeetCodeEasy {
 //		jobs.add(new Job(4,15, 1));
 
 //		System.out.println(jobScheduling(jobs));
+
+//		char[][] grids ={
+//				{'1','1','1','1','0'},
+//				{'1','1','0','1','0'},
+//				{'1','1','0','0','0'},
+//				{'0','0','0','0','0'}
+//		};
+//		
+//		System.out.println(numIslands(grids));
+
+//		int[][] maze = {
+//				{1,0,0,0,0},
+//				{1,1,1,0,0},
+//				{1,1,1,1,1},
+//				{0,0,1,0,1}
+//		};
+
+//		int[][] maze = { 
+//				{ 1, 0, 0 }, 
+//				{ 1, 1, 0 }, 
+//				{ 0, 1, 1 } 
+//				};
+
+//		System.out.println(pathExists(maze));
+
+//		int[][] edges = { {0,1},{0,2},{3,5},{5,4},{4,3} };
 		
-		
-		char[][] grids ={
-				{'1','1','1','1','0'},
-				{'1','1','0','1','0'},
-				{'1','1','0','0','0'},
-				{'0','0','0','0','0'}
-		};
-		
-		System.out.println(numIslands(grids));
-		
-		
+
 	}
 
 //	public static List<Job> jobScheduling(List<Job> jobs) {
@@ -242,9 +258,6 @@ public class LeetCodeEasy {
 //		}
 //		 return job;
 //	}
-	
-
-	
 
 	public static int[] dailyTemperatures(int[] temperatures) {
 		int[] daysUntil = new int[temperatures.length];
@@ -923,7 +936,7 @@ public class LeetCodeEasy {
 
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[i].length; j++) {
-				if(grid[i][j] == '1') {
+				if (grid[i][j] == '1') {
 					numberIslands++;
 					bfs(i, j, grid);
 				}
@@ -946,5 +959,33 @@ public class LeetCodeEasy {
 		bfs(row, col - 1, grid); // Check left
 		bfs(row, col + 1, grid); // Check right
 	}
+
+	public static boolean pathExists(int[][] mat) {
+//		for(int i = 0; i < mat.length; i ++) {
+//			for(int j = 0; j < mat[i].length; j ++) {
+//				if(mat[i][j] == 1) {
+//					if(findPaths(mat, i, j)) {
+//						return true;
+//					}
+//				}
+//			}
+//		}
+
+		return findPaths(mat, 0, 0);
+	}
+
+	public static boolean findPaths(int[][] mat, int i, int j) {
+		if (i >= mat.length || j >= mat[0].length || i < 0 || j < 0 || mat[i][j] == 0) {
+			return false;
+		}
+
+		if ((i == mat.length - 1) && (j == mat[0].length - 1)) {
+			return true;
+		}
+
+		return findPaths(mat, i + 1, j) || findPaths(mat, i, j + 1);
+
+	}
+
 
 }
